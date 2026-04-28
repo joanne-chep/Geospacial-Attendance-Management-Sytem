@@ -1,0 +1,249 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.login-body, .signup-body {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 0;
+}
+
+.login-body::before, .signup-body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("Ashesi.jpeg") no-repeat center center;
+    background-size: cover;
+    opacity: 0.08;
+    z-index: -1;
+}
+
+.login-container, .signup-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 360px;
+    text-align: center;
+    z-index: 2;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.login-logo img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+}
+
+.login-logo h1 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #16007a;
+    margin-top: 0.5rem;
+}
+
+.login-form input, .signup-form input,
+.login-form select, .signup-form select,
+.login-form button, .signup-form button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.login-form button, .signup-form button {
+    background-color: #16007a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-form button:hover, .signup-form button:hover {
+    background-color: #9e0022;
+}
+
+.login-form a, .signup-form a {
+    color: #16007a;
+    cursor: pointer;
+}
+
+.login-form a:hover, .signup-form a:hover {
+    text-decoration: underline;
+}
+
+.dashboard-header {
+    position: fixed;
+    top: 0;
+    left: 260px;
+    right: 0;
+    background-color: white;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.dashboard-header img {
+    height: 45px;
+    border-radius: 50%;
+}
+
+.dashboard-header h1 {
+    color: #16007a;
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background-color: #16007a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1.5rem;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.ashesi-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.system-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.profile-section {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.profile-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid white;
+    object-fit: cover;
+}
+
+.profile-name {
+    margin-top: 0.6rem;
+    font-weight: 500;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar-menu li a {
+    display: block;
+    color: white;
+    padding: 0.9rem 1.5rem;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.sidebar-menu li a:hover {
+    background-color: #9e0022;
+}
+
+.main-content {
+    margin-left: 260px;
+    padding: 6rem 2rem 2rem 2rem;
+    width: calc(100% - 260px);
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    animation: fadeInUp 1s ease;
+}
+
+.main-content h2 {
+    color: #16007a;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.content-section {
+    display: none;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.content-section.active {
+    display: block;
+}
+
+.content-section h3 {
+    color: #16007a;
+    margin-bottom: 1rem;
+}
+
+.content-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.content-section ul li {
+    background-color: #f1f1f1;
+    margin: 6px 0;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+.content-section ul li:hover {
+    background-color: #eaeaea;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    .dashboard-header {
+        left: 200px;
+    }
+    .main-content {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+    }
+}
