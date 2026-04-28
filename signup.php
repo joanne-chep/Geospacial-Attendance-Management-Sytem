@@ -9,6 +9,7 @@ ini_set('display_errors', 1);
 //This starts a session, where users can provide their information to create an account
 session_start();
 include 'db.php'; //The database connection file
+$conn = connectDB();
 //This reports MySQLi errors as exceptions for better error handling
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
