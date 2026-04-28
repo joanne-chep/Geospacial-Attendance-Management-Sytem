@@ -10,6 +10,7 @@ session_start();
 
 //This includes the database connection file
 include 'db.php';
+$conn = connectDB();
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 //This block handles the form submission for user login
