@@ -1,26 +1,40 @@
 <?php
-//db.php - Refactored to use the Singleton Pattern for resource management
+/**
+ * db.php
+ * Implements the Singleton Pattern to manage database connectivity.
+ * This architecture ensures that a single database connection is maintained 
+ * throughout the application lifecycle, preventing redundant resource consumption.
+ */
 
 class Database {
-    // This static variable holds our single instance
+    /**
+     * Static member to hold the unique instance of the Database class.
+     */
     private static $instance = null;
     private $conn;
 
-    // A private constructor prevents creating new instances via 'new Database()'
+    /**
+     * Private constructor to enforce the Singleton pattern by preventing 
+     * external instantiation.
+     */
     private function __construct() {
         $host = "localhost";
         $user = "root"; 
         $pass = ""; 
-        $dbname = "webtech_2025a_joanne_chepkoech";
+        $dbname = "geospacial_attendance_management";
 
         $this->conn = new mysqli($host, $user, $pass, $dbname);
 
         if ($this->conn->connect_error) {
-            throw new Exception("Connection failed: " . $this->conn->connect_error);
+            error_log("Database connection failure: " . $this->conn->connect_error);
+            throw new Exception("Critical: Failed to establish a connection to the data repository.");
         }
     }
 
-    // The static method that controls access to the instance
+    /**
+     * Controls access to the unique instance of the class.
+     * * @return Database The single instance of the Database class.
+     */
     public static function getInstance() {
         if (self::$instance === null) {
             self::$instance = new Database();
@@ -28,12 +42,21 @@ class Database {
         return self::$instance;
     }
 
+    /**
+     * Provides access to the established mysqli connection object.
+     * * @return mysqli The active database connection.
+     */
     public function getConnection() {
         return $this->conn;
     }
 }
 
-// Global helper function to maintain compatibility with your other files
+/**
+ * Global accessor function for the database connection.
+ * Facilitates integration across various modules while maintaining 
+ * the integrity of the Singleton instance.
+ * * @return mysqli The active database connection.
+ */
 function connectDB() {
     return Database::getInstance()->getConnection();
 }
