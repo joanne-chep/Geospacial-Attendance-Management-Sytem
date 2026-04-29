@@ -47,7 +47,7 @@ body {
 .login-logo h1 {
     font-size: 1.4rem;
     font-weight: 600;
-    color: #16007a;
+    color: #7a000a;
     margin-top: 0.5rem;
 }
 
@@ -63,7 +63,7 @@ body {
 }
 
 .login-form button, .signup-form button {
-    background-color: #16007a;
+    background-color: #7a000a;
     color: white;
     border: none;
     cursor: pointer;
@@ -75,7 +75,7 @@ body {
 }
 
 .login-form a, .signup-form a {
-    color: #16007a;
+    color: #7a000a;
     cursor: pointer;
 }
 
@@ -103,7 +103,7 @@ body {
 }
 
 .dashboard-header h1 {
-    color: #16007a;
+    color: #7a000a;
     font-size: 1.4rem;
     margin: 0;
 }
@@ -114,7 +114,7 @@ body {
     left: 0;
     width: 260px;
     height: 100vh;
-    background-color: #16007a;
+    background-color: #7a000a;
     color: white;
     display: flex;
     flex-direction: column;
@@ -186,7 +186,7 @@ body {
 }
 
 .main-content h2 {
-    color: #16007a;
+    color: #7a000a;
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
 }
@@ -204,7 +204,7 @@ body {
 }
 
 .content-section h3 {
-    color: #16007a;
+    color: #7a000a;
     margin-bottom: 1rem;
 }
 
