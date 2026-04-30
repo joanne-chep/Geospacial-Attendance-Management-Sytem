@@ -149,7 +149,7 @@ try {
     </aside>
 
     <main class="main-content">
-        <h2 id="welcomeMessage">WELCOME! <?php echo $name; ?> (Student) 👋</h2>
+        <h2 id="welcomeMessage">WELCOME! <?php echo $name; ?> (Student)</h2>
 
         <?php if ($message): ?>
             <p style="color:green; background-color:#e0ffe0; padding:15px; border-radius:6px; margin-bottom: 20px; border: 1px solid green;"><?php echo $message; ?></p>
