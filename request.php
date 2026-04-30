@@ -1,53 +1,61 @@
 <?php
-//updated request.php, responsible for handling course requests by students
+/**
+ * request.php
+ * Facilitates the submission of course enrolment requests by students.
+ * Utilises the Singleton database connection to manage request persistence.
+ */
 
-//This is for error identification in cases of issues
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
 
 include 'db.php';
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-//This ensure that requests can only be sent by students
+
+/**
+ * Authentication gate ensuring only authorised students can initiate requests.
+ */
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
     header("Location: login.php");
     exit();
 }
-//If the form is submitted, process the data
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['course_id'])) {
-    header("Location: student-dashboard.php?error=" . urlencode("Invalid request method."));
+    header("Location: student-dashboard.php?error=" . urlencode("Invalid request protocol."));
     exit();
 }
 
-$conn = $conn;
+/**
+ * Initialisation of the database connection utilising the centralised Singleton instance.
+ */
+$conn = connectDB();
 $studentId = $_SESSION['user_id'];
-//Get the course ID from the form
 $courseId = (int)$_POST['course_id'];
 
 try {
-    //Insert the request into the database
-    //This will be used to check if the student has already requested the course
+    /**
+     * Persistence of the enrolment request using parameterised queries for architectural security.
+     */
     $stmt = $conn->prepare("INSERT INTO requests (course_id, student_id) VALUES (?, ?)");
     $stmt->bind_param("ii", $courseId, $studentId);
     $stmt->execute();
     $stmt->close();
-    //Redirect to the student dashboard with a display of a success meassage
-    header("Location: student-dashboard.php?message=" . urlencode("Request sent successfully! Awaiting faculty Intern approval."));
+
+    header("Location: student-dashboard.php?message=" . urlencode("Enrolment request submitted successfully. Awaiting Faculty Intern verification."));
     exit();
 
 } catch (mysqli_sql_exception $ex) {
-    $errorMessage = "Request failed: ";
-    //This will be used to check if the student has already requested the course
-    //No duplicate requests accepted
+    $errorMessage = "Submission failure: ";
     if ($ex->getCode() === 1062) {
-        $errorMessage .= "You have already requested this course.";
+        $errorMessage .= "A pending request already exists for this module.";
     } else {
-        $errorMessage .= "Database error occurred.";
+        $errorMessage .= "A database exception occurred during processing.";
     }
     header("Location: student-dashboard.php?error=" . urlencode($errorMessage));
     exit();
 } catch (Exception $ex) {
-    header("Location: student-dashboard.php?error=" . urlencode("An unexpected error occurred."));
+    error_log("General Request Exception: " . $ex->getMessage());
+    header("Location: student-dashboard.php?error=" . urlencode("An unexpected system error occurred."));
     exit();
 } finally {
     if (isset($conn) && $conn instanceof mysqli) {
