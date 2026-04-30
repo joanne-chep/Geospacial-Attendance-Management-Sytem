@@ -1,5 +1,5 @@
 <?php
-//request.php, responsible for handling course requests by students
+//updated request.php, responsible for handling course requests by students
 
 //This is for error identification in cases of issues
 error_reporting(E_ALL);
