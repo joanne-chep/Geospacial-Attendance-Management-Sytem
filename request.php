@@ -34,7 +34,7 @@ $courseId = (int)$_POST['course_id'];
 
 try {
     /**
-     * Persistence of the enrolment request using parameterised queries for architectural security.
+     * Prepared statement to securely insert a new enrolment request into the database, preventing SQL injection and ensuring data integrity.
      */
     $stmt = $conn->prepare("INSERT INTO requests (course_id, student_id) VALUES (?, ?)");
     $stmt->bind_param("ii", $courseId, $studentId);
