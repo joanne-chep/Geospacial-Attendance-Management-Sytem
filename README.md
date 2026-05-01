@@ -14,6 +14,8 @@ The attendance submission logic implements a Strategy Pattern. This allows the s
 The course registration module employs an Adapter Pattern. This architectural choice decouples the raw input data from the business logic, ensuring that the system remains robust against changes in data format or source.
 * **COMPOSITE PATTERN**
 The Faculty Intern dashboard is structured using a Composite Pattern. This allows the user interface to be treated as a collection of modular sections, such as scanners and report generators, which can be managed uniformly.
+* **BUILDER PATTERN**
+The system implements a Builder Design Pattern to manage the instantiation of academic sessions. This creational pattern is utilised to separate the complex construction of a session object from its operational representation. By employing a fluent interface, the Session Builder ensures that all mandatory attributes such as course identification and temporal parameters are correctly populated and validated before the final object is committed to the database. This architectural approach enhances code maintainability by centralising validation rules and the automated generation of unique attendance verification codes within a single dedicated class.
 
 ## KEY FUNCTIONALITIES
 
